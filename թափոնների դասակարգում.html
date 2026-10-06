@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Թափոնների Դասակարգում | ԷկոԿետ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #2e7d32; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px; width: 100%; background: white;
+            padding: 35px 25px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center;
+        }
+        h1 { font-size: 1.5rem; color: #1b5e20; margin-bottom: 8px; }
+        .subtitle { font-size: 0.85rem; color: #666; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 0.85rem; color: #444; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px 14px; border: 2px solid #c8e6c9;
+            border-radius: 10px; font-size: 0.9rem; outline: none; background: #fff;
+        }
+        #studentClassGroup { display: none; }
+        .eco-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32); color: white;
+            border: none; width: 100%; padding: 12px; font-size: 0.95rem; font-weight: 600;
+            border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            margin-top: 10px; transition: 0.3s;
+        }
+        .eco-btn:hover { background: linear-gradient(135deg, #43a047, #1b5e20); }
+
+        /* ՀԱՋՈՂՈՒԹՅԱՆ ՊԱՏՈՒՀԱՆ */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-box {
+            background: white; width: 100%; max-width: 460px; padding: 30px;
+            border-radius: 20px; text-align: center; transform: scale(0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .modal-overlay.active .modal-box { transform: scale(1); }
+        .modal-icon { font-size: 3.5rem; margin-bottom: 15px; }
+        .modal-box h2 { color: #2e7d32; font-size: 1.3rem; margin-bottom: 12px; }
+        .modal-box p { color: #555; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
+        .btn-flex { display: flex; gap: 10px; flex-direction: column; }
+        .competition-btn {
+            background: linear-gradient(135deg, #ff9800, #f57c00); color: white;
+            border: none; width: 100%; padding: 11px; font-size: 0.9rem; font-weight: 600;
+            border-radius: 10px; cursor: pointer; text-decoration: none; display: inline-block;
+        }
+        .close-page-btn {
+            background: #e0e0e0; color: #333; border: none; width: 100%; padding: 11px;
+            font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer;
+        }
+        .close-page-btn:hover { background: #d5d5d5; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>♻️ Թափոնների Դասակարգում</h1>
+        <p class="subtitle">Լրացրեք տվյալները և հանձնեք աղբը</p>
+
+        <form id="ecoForm" novalidate>
+            <div class="form-group">
+                <label>Անուն, Ազգանուն *</label>
+                <input type="text" id="fullName" placeholder="Օր.՝ Արամ Մանուկյան" required>
+            </div>
+
+            <div class="form-group">
+                <label>Էլ. փոստ (E-mail) * <small style="color:#d32f2f;">(Օրը մեկ անգամ)</small></label>
+                <input type="email" id="userEmail" placeholder="example@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Դուք ո՞վ եք *</label>
+                <select id="userRole" required>
+                    <option value="" disabled selected>Ընտրեք կարգավիճակը</option>
+                    <option value="Աշակերտ">Աշակերտ</option>
+                    <option value="Ուսուցիչ">Ուսուցիչ</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="studentClassGroup">
+                <label>Դասարան *</label>
+                <input type="text" id="studentClass" placeholder="Օր.՝ 9Ա">
+            </div>
+
+            <div class="form-group">
+                <label>Ինչպիսի՞ աղբ եք թափում *</label>
+                <select id="wasteType" required>
+                    <option value="" disabled selected>Ընտրեք տեսակը</option>
+                    <option value="Թուղթ">Թուղթ 📄</option>
+                    <option value="Պլաստիկ">Պլաստիկ 🧴</option>
+                    <option value="Ընդհանուր թափոններ">Ընդհանուր թափոններ 🗑️</option>
+                </select>
+            </div>
+
+            <button type="submit" class="eco-btn">Հանձնել աղբը 🌍</button>
+        </form>
+    </div>
+
+    <!-- ՀԱՋՈՂՈՒԹՅԱՆ ՊԱՏՈՒՀԱՆ -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box" id="modalBoxContent">
+            <div class="modal-icon">🎉</div>
+            <h2 id="modalTitle">Կեցցես!</h2>
+            <p>Ձեր գրանցումը հաջողությամբ պահպանվեց։ Մրցույթին մասնակցելու համար անցեք մրցույթի կանոնների էջ և ուղարկեք տեսանյութը:</p>
+            <div class="btn-flex">
+                <a href="competition.html" class="competition-btn">Մրցույթի կանոններ և վիդեոյի ուղարկում 🏆</a>
+                <button type="button" id="closePageBtn" class="close-page-btn">Փակել էջը ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userRoleSelect = document.getElementById('userRole');
+        const studentClassGroup = document.getElementById('studentClassGroup');
+        const studentClassInput = document.getElementById('studentClass');
+        const ecoForm = document.getElementById('ecoForm');
+        const successModal = document.getElementById('successModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBoxContent = document.getElementById('modalBoxContent');
+        const closePageBtn = document.getElementById('closePageBtn');
+
+        userRoleSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'Աշակերտ') {
+                studentClassGroup.style.display = 'block';
+                studentClassInput.required = true;
+            } else {
+                studentClassGroup.style.display = 'none';
+                studentClassInput.required = false;
+                studentClassInput.value = '';
+            }
+        });
+
+        // Փակել էջը կոճակի սեղմման տրամաբանությունը (Գեղեցիկ ֆոնով պատուհան)
+        closePageBtn.addEventListener('click', () => {
+            modalBoxContent.style.background = 'linear-gradient(135deg, #e8f5e9, #c8e6c9)';
+            modalBoxContent.style.border = '2px solid #4caf50';
+            modalBoxContent.innerHTML = `
+                <div style="font-size: 3.5rem; margin-bottom: 10px;">🌍💚</div>
+                <h2 style="color: #1b5e20; margin-bottom: 15px;">Շնորհակալություն մասնակցության համար</h2>
+                <p style="color: #333; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+                    Թեկուզ և դու չմասնակցեցիր մրցույթին, բայց դու մեծ փոքրիկ քայլ արեցիր, և քո անունը մոլորակի համար մեծ նշանակություն կունենա։։։
+                </p>
+                <button type="button" onclick="window.close(); document.body.innerHTML='<div style=\'display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins,sans-serif;background:#e8f5e9;color:#2e7d32;text-align:center;\'><div><h1>✅ Էջը փակված է</h1><p>Կարող եք փակել այս պատուհանը։</p></div></div>';" style="background: #2e7d32; color: white; border: none; width: 100%; padding: 11px; font-weight: 600; border-radius: 10px; cursor: pointer;">Փակել 🚪</button>
+            `;
+        });
+
+        ecoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const role = userRoleSelect.value;
+            const wasteType = document.getElementById('wasteType').value;
+            const studentClass = studentClassInput.value.trim();
+
+            if (!fullName || !email || !role || !wasteType) {
+                alert('Խնդրում ենք լրացնել բոլոր պարտադիր դաշտերը:');
+                return;
+            }
+            if (role === 'Աշակերտ' && !studentClass) {
+                alert('Նշեք դասարանը:');
+                return;
+            }
+
+            let usersList = JSON.parse(localStorage.getItem('ecoUsersList')) || [];
+            const todayStr = new Date().toLocaleDateString();
+
+            const alreadyToday = usersList.find(item => item.email.toLowerCase() === email.toLowerCase() && item.submissionDate === todayStr);
+            if (alreadyToday) {
+                alert('⚠️ Ոշադրություն: Դուք արդեն գրանցվել եք այս էլ. փոստով այսօր։ Հնարավոր է թարմացնել միայն օրը մեկ անգամ։');
+                return;
+            }
+
+            const userClassFormatted = role === 'Աշակերտ' ? ` (${studentClass})` : '';
+
+            modalTitle.textContent = `Կեցցես, ${fullName}!`;
+            successModal.classList.add('active');
+
+            // Պահպանում ենք ընդհանուր գրանցվածների ցանկում
+            usersList.unshift({
+                name: fullName + userClassFormatted,
+                email: email,
+                role: role,
+                waste: wasteType,
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                submissionDate: todayStr
+            });
+            localStorage.setItem('ecoUsersList', JSON.stringify(usersList));
+        });
+    </script>
+</body>
+</html>

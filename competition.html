@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Մրցույթի Կանոններ և Վիդեոյի Ուղարկում | ԷկոԿետ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #f1f8e9, #dcedc8);
+            color: #333; min-height: 100vh; padding: 30px 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .container {
+            max-width: 750px; width: 100%; background: white;
+            padding: 40px 30px; border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08); text-align: left;
+        }
+        .logo-area { text-align: center; margin-bottom: 20px; }
+        .logo-area span { font-size: 3rem; }
+        h1 { font-size: 1.8rem; color: #1b5e20; text-align: center; margin-bottom: 10px; }
+        .subtitle { font-size: 0.95rem; color: #666; text-align: center; margin-bottom: 30px; }
+        
+        .rules-box { background: #f9fbe7; border-left: 5px solid #4caf50; padding: 20px; border-radius: 10px; margin-bottom: 25px; }
+        .rules-box h3 { color: #2e7d32; margin-bottom: 12px; font-size: 1.1rem; }
+        .rules-box ul { padding-left: 20px; }
+        .rules-box li { margin-bottom: 10px; font-size: 0.9rem; line-height: 1.6; color: #444; }
+
+        .highlight { background: #fff3e0; border-left-color: #ff9800; }
+        .highlight h3 { color: #e65100; }
+
+        .upload-section { background: #e8f5e9; border: 2px dashed #4caf50; padding: 20px; border-radius: 12px; margin-top: 25px; text-align: center; }
+        .upload-section h3 { color: #1b5e20; margin-bottom: 10px; font-size: 1.1rem; }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label { display: block; font-size: 0.85rem; color: #444; margin-bottom: 5px; font-weight: 600; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #fff; font-size: 0.9rem; }
+        
+        .send-mail-btn {
+            background: linear-gradient(135deg, #2196f3, #1565c0); color: white;
+            border: none; width: 100%; padding: 12px; font-size: 0.95rem; font-weight: 600;
+            border-radius: 10px; cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .send-mail-btn:hover { background: linear-gradient(135deg, #1e88e5, #0d47a1); }
+
+        /* ՇՆՈՐՀԱԿԱԼԱԿԱՆ ՄՈԴԱԼ ՊԱՏՈՒՀԱՆ */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: 0.3s; z-index: 1000; padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-box {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9); width: 100%; max-width: 450px; padding: 35px;
+            border-radius: 20px; text-align: center; border: 2px solid #4caf50; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div class="logo-area">
+            <span>🌿🏆♻️</span>
+        </div>
+        <h1>Էկո-Մրցույթի Պաշտոնական Կանոններ</h1>
+        <p class="subtitle">Միասին պահպանենք մաքուր մեր շրջակա միջավայրը և շահենք արժեքավոր մրցանակներ</p>
+
+        <div class="rules-box">
+            <h3>📋 Հիմնական Կանոններ և Պայմաններ</h3>
+            <ul>
+                <li><strong>Տևողությունը՝</strong> Մրցույթը տևելու է ընդհանուր առմամբ <strong>3 օր</strong>:</li>
+                <li><strong>Ամենօրյա Հաղթող՝</strong> Ամեն օր վերջում ընտրվելու է մեկ հաղթող՝ <strong>պատահականության սկզբունքով</strong> հաստատված մասնակիցների միջից:</li>
+                <li><strong>Տեսանյութի Պահանջ (Խիստ)՝</strong> Պարտադիր պետք է ուղարկել տեսանյութ (կարող եք ուղարկել նույնիսկ մեկ անիմաստ տեսանյութ, միևնույն է՝ մենք ստուգելու ենք այն): Այն ուղարկվում է <code>naghajanyan8@gmail.com</code> հասցեին:</li>
+                <li><strong>Ստուգում Ուսուցչի Կողմից՝</strong> Բոլոր ուղարկված տեսանյութերը ստուգվում են ուսուցչական վահանակում։</li>
+                <li><strong>Էլ. փոստի Համապատասխանություն՝</strong> Մրցույթի էջում գրվող էլ. փոստը պարտադիր պետք է համապատասխանի այն էլ. փոստին, որով գրանցվել եք թափոնների դասակարգման հիմնական էջում։</li>
+            </ul>
+        </div>
+
+        <!-- ՏԵՍԱՆՅՈՒԹԻ ՈՒՂԱՐԿՄԱՆ ԲԱԺԻՆ -->
+        <div class="upload-section">
+            <h3>📤 Ուղարկել Մրցույթի Տեսանյութը</h3>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">Լրացրեք ձեր տվյալները և կցեք տեսանյութը։</p>
+            
+            <form id="videoUploadForm">
+                <div class="form-group">
+                    <label>Ձեր Անուն, Ազգանուն</label>
+                    <input type="text" id="senderName" placeholder="Օր.՝ Արամ Մանուկյան" required>
+                </div>
+                <div class="form-group">
+                    <label>Ձեր Էլ. փոստը (նույնը, ինչ գրանցվելիս)</label>
+                    <input type="email" id="senderEmail" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Ընտրեք տեսանյութի ֆայլը</label>
+                    <input type="file" id="videoFile" accept="video/*" required style="padding: 6px; background: white;">
+                </div>
+                <button type="submit" class="send-mail-btn">✉️ Ուղարկել տեսանյութը մեյլին (naghajanyan8@gmail.com)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ՇՆՈՐՀԱԿԱԼԱԿԱՆ ՄՈԴԱԼ -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">🌟🌿</div>
+            <h2 style="color: #1b5e20; margin-bottom: 12px;">Շնորհակալություն</h2>
+            <p style="color: #333; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+                Հարգելի մոլորակի բնակիչ։ Մաղթում ենք քեզ հաջողություն 🍀
+            </p>
+            <button type="button" onclick="window.close(); location.reload();" style="background: #2e7d32; color: white; border: none; width: 100%; padding: 11px; font-weight: 600; border-radius: 10px; cursor: pointer;">Փակել 🚪</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('senderName').value.trim();
+            const email = document.getElementById('senderEmail').value.trim().toLowerCase();
+            const videoFile = document.getElementById('videoFile').files[0];
+
+            if (!name || !email || !videoFile) {
+                alert('Խնդրում ենք լրացնել բոլոր դաշտերը և ընտրել տեսանյութը:');
+                return;
+            }
+
+            // Ստուգում ենք՝ արդյոք այս մեյլով գրանցում կա թափոնների բաժնում
+            const usersList = JSON.parse(localStorage.getItem('ecoUsersList')) || [];
+            const registeredUser = usersList.find(u => u.email.toLowerCase() === email);
+
+            if (!registeredUser) {
+                alert('⚠️ Սխալ: Այս էլ. փոստով գրանցում չի հայտնաբերվել «Թափոնների դասակարգում» բաժնում։ Խնդրում ենք նախ լրացնել հիմնական գրանցման ձևաթուղթը։');
+                return;
+            }
+
+            // Պահպանում ենք տեսանյութի հայտը ուսուցչի ստուգման համար
+            let submissions = JSON.parse(localStorage.getItem('ecoSubmissions')) || [];
+            
+            // Հեռացնում ենք հին կրկնվող հայտը, եթե կա, և ավելացնում նորը
+            submissions = submissions.filter(item => item.email.toLowerCase() !== email);
+
+            submissions.unshift({
+                id: Date.now(),
+                name: registeredUser.name,
+                email: email,
+                role: registeredUser.role,
+                waste: registeredUser.waste,
+                video: videoFile.name,
+                status: 'pending',
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                submissionDate: new Date().toLocaleDateString()
+            });
+
+            localStorage.setItem('ecoSubmissions', JSON.stringify(submissions));
+
+            // Բացում ենք mailto հղումը
+            const mailtoLink = `mailto:naghajanyan8@gmail.com?subject=Էկո-Մրցույթի Տեսանյութ (${encodeURIComponent(name)})&body=Բարև ձեզ,%0D%0AՈւղարկում եմ իմ տեսանյութը մրցույթի համար:%0D%0AԱնուն: ${encodeURIComponent(name)}%0D%0AԷլ. փոստ: ${encodeURIComponent(email)}%0D%0AՖայլի անուն: ${encodeURIComponent(videoFile.name)}`;
+            
+            window.location.href = mailtoLink;
+
+            // Ցույց ենք տալիս հաջողության գեղեցիկ պատուհանը
+            document.getElementById('successModal').classList.add('active');
+        });
+    </script>
+</body>
+</html>
